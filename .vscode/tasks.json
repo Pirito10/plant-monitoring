@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Cleanup",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Get-ChildItem -Recurse -Directory -Filter '__pycache__' | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Recurse -Force -ErrorAction SilentlyContinue data/, logs/; exit 0"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Install dependencies",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "pip install -r requirements.txt"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Setup Project",
+            "dependsOn": [
+                "Cleanup",
+                "Install dependencies"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        }
+    ]
+}
