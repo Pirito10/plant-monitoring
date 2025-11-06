@@ -13,6 +13,7 @@ def take_photo(out_dir, width, height):
     picam.configure(config)
     picam.start()
 
-    filepath = out / f"{datetime.now():%Y-%m-%d_%H%S}.jpg"
+    filepath = out / f"{datetime.now():%Y-%m-%d_%H-%M}.jpg"
     picam.capture_file(filepath)
     picam.stop()
+    picam.close()
