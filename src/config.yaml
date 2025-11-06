@@ -1,0 +1,9 @@
+camera:
+  width: 2592
+  height: 1944
+
+paths:
+  photos: photos
+
+scheduler:
+  hours: [10, 18]

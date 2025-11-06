@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path
 from picamera2 import Picamera2
 
-def take_photo(out_dir="photos", width=1920, height=1080):
+def take_photo(out_dir, width, height):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
 
@@ -13,6 +13,6 @@ def take_photo(out_dir="photos", width=1920, height=1080):
     picam.configure(config)
     picam.start()
 
-    filepath = out / f"{datetime.now():%Y%m%d}.jpg"
+    filepath = out / f"{datetime.now():%Y-%m-%d_%H%S}.jpg"
     picam.capture_file(filepath)
     picam.stop()
