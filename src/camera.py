@@ -16,3 +16,4 @@ def take_photo(out_dir, width, height):
     filepath = out / f"{datetime.now():%Y-%m-%d_%H-%M}.jpg"
     picam.capture_file(filepath)
     picam.stop()
+    picam.close()
