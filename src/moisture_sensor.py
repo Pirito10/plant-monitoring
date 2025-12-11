@@ -8,7 +8,7 @@ i2c = board.I2C()
 ads = ADS1115(i2c)
 
 # Creamos el canal analógico para el sensor de humedad
-chan = AnalogIn(ads, ads1x15.A0)
+chan = AnalogIn(ads, ads1x15.Pin.A0)
 
 # Función para leer la humedad del suelo
 def read_soil_moisture():
