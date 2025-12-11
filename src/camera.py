@@ -1,5 +1,4 @@
 from datetime import datetime
-from pathlib import Path
 from picamera2 import Picamera2
 
 from src.config import BASE_DIR
