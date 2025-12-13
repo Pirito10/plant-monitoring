@@ -7,3 +7,7 @@ paths:
 
 scheduler:
   hours: [10, 18]
+
+moisture:
+  raw_dry: 21550
+  raw_wet: 7600
