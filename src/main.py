@@ -24,8 +24,8 @@ scheduler.add_job(
 
 #! Temporal
 def job_read_moisture():
-    raw, voltage = read_soil_moisture()
-    print(f"Humedad suelo -> Raw: {raw}, Voltaje: {voltage:.4f} V")
+    moisture = read_soil_moisture(cfg["moisture"]["raw_dry"], cfg["moisture"]["raw_wet"])
+    print(f"Humedad suelo: {moisture:5.1f}%")
 
 # Programamos la lectura del sensor de humedad
 scheduler.add_job(
