@@ -10,6 +10,20 @@ ads = ADS1115(i2c)
 # Creamos el canal analógico para el sensor de humedad
 chan = AnalogIn(ads, ads1x15.Pin.A0)
 
-# Función para leer la humedad del suelo
-def read_soil_moisture():
-    return chan.value, chan.voltage
+# Función para leer el valor bruto del sensor de humedad
+def read_raw():
+    return chan.value
+
+# Función para convertir un valor bruto a humedad relativa normalizada
+def raw_to_moisture(raw, raw_dry, raw_wet):
+    # Calculamos la humedad relativa normalizada
+    moisture = (raw_dry - raw) / (raw_dry - raw_wet)
+    # Devolvemos el valor entre 0 y 1
+    return max(0, min(1, moisture))
+
+# Función para leer la humedad del suelo en porcentaje
+def read_soil_moisture(raw_dry, raw_wet):
+    # Leemos el valor bruto del sensor
+    raw = read_raw()
+    # Devolvemos el valor bruto convertido a humedad relativa en porcentaje
+    return raw_to_moisture(raw, raw_dry, raw_wet) * 100
