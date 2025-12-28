@@ -1,13 +1,37 @@
+# ==========
+# 📷 Cámara
+# ==========
+
 camera:
+  # Resolución de la cámara en píxeles
   width: 2592
   height: 1944
 
+
+# =========
+# 📁 Rutas
+# =========
+
 paths:
+  # Directorio donde se guardarán las fotos
   photos: photos
 
+
+# ===========================
+# ⏱️ Planificación de tareas
+# ===========================
+
 scheduler:
+  # Horas del día (0-23) para tomar fotos
   hours: [10, 18]
 
+
+# =====================
+# 💧 Sensor de humedad
+# =====================
+
 moisture:
+  # Valor absoluto de humedad en seco
   raw_dry: 21550
+  # Valor absoluto de humedad en mojado
   raw_wet: 7600
