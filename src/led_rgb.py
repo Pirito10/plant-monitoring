@@ -1,28 +1,25 @@
 import RPi.GPIO as GPIO
 
-# Definimos los pines para el LED RGB
-PIN_R = 17
-PIN_G = 27
-PIN_B = 22
+# Función para inicializar el LED RGB
+def init(pin_r, pin_g, pin_b, pwm_freq):
+    # Variables globales
+    global pwm_r, pwm_g, pwm_b
 
-# Definimos la frecuencia de PWM
-PWM_FREQ = 500
+    # Inicializamos los pines GPIO
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(pin_r, GPIO.OUT)
+    GPIO.setup(pin_g, GPIO.OUT)
+    GPIO.setup(pin_b, GPIO.OUT)
 
-# Inicializamos los pines GPIO
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(PIN_R, GPIO.OUT)
-GPIO.setup(PIN_G, GPIO.OUT)
-GPIO.setup(PIN_B, GPIO.OUT)
+    # Configuramos la frecuencia PWM para cada color
+    pwm_r = GPIO.PWM(pin_r, pwm_freq)
+    pwm_g = GPIO.PWM(pin_g, pwm_freq)
+    pwm_b = GPIO.PWM(pin_b, pwm_freq)
 
-# Configuramos PWM para cada pin
-pwm_r = GPIO.PWM(PIN_R, PWM_FREQ)
-pwm_g = GPIO.PWM(PIN_G, PWM_FREQ)
-pwm_b = GPIO.PWM(PIN_B, PWM_FREQ)
-
-# Apagamos el LED al inicio
-pwm_r.start(0)
-pwm_g.start(0)
-pwm_b.start(0)
+    # Apagamos el LED al inicio
+    pwm_r.start(0)
+    pwm_g.start(0)
+    pwm_b.start(0)
 
 # Función para calcular el color RGB para un valor de humedad
 def moisture_to_color(moisture, optimal):

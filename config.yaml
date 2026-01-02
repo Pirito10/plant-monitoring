@@ -23,7 +23,9 @@ paths:
 
 scheduler:
   # Horas del día (0-23) para tomar fotos
-  hours: [10, 18]
+  photo_hours: [10, 18]
+  # Intervalo (en segundos) para medir la humedad del suelo
+  moisture_interval: 10
 
 
 # =====================
@@ -31,7 +33,26 @@ scheduler:
 # =====================
 
 moisture:
+  # Pin analógico al que está conectado el sensor de humedad
+  pin: A0
   # Valor absoluto de humedad en seco
   raw_dry: 21550
   # Valor absoluto de humedad en mojado
   raw_wet: 7600
+  # Valor de humedad (en porcentaje) considerado óptimo
+  optimal: 50
+
+
+# ===========
+# 💡 LED RGB
+# ===========
+
+led_rgb:
+  # Pines GPIO a los que están conectados los canales del LED RGB
+  pins:
+    red: 17
+    green: 27
+    blue: 22
+
+  # Frecuencia PWM (en Hz) para el control del LED RGB
+  pwm_frequency: 500

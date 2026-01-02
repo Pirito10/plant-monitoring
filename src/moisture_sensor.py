@@ -1,14 +1,19 @@
 import board
 from adafruit_ads1x15 import ADS1115, AnalogIn, ads1x15
 
-# Creamos el bus I2C
-i2c = board.I2C()
+# Función para inicializar el sensor de humedad
+def init(pin):
+    # Variables globales
+    global i2c, ads, chan
 
-# Creamos el objecto ADC
-ads = ADS1115(i2c)
+    # Creamos el bus I2C
+    i2c = board.I2C()
+    
+    # Creamos el objecto ADC
+    ads = ADS1115(i2c)
 
-# Creamos el canal analógico para el sensor de humedad
-chan = AnalogIn(ads, ads1x15.Pin.A0)
+    # Creamos el canal analógico para el sensor de humedad
+    chan = AnalogIn(ads, getattr(ads1x15.Pin, pin))
 
 # Función para leer el valor bruto del sensor de humedad
 def read_raw():
