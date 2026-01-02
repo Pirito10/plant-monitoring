@@ -1,6 +1,6 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from src import config, camera, moisture_sensor, led_rgb
+from src import config, camera, moisture_sensor, led_rgb, display
 
 # Cargamos la configuración
 cfg = config.load_config()
@@ -15,6 +15,9 @@ led_rgb.init(
     cfg["led_rgb"]["pins"]["blue"],
     cfg["led_rgb"]["pwm_frequency"]
 )
+
+# Inicializamos la pantalla
+display.init()
 
 # Creamos el planificador de tareas
 scheduler = BlockingScheduler()
