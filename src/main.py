@@ -1,12 +1,12 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from src import config, camera, moisture, led_rgb
+from src import config, camera, moisture_sensor, led_rgb
 
 # Cargamos la configuración
 cfg = config.load_config()
 
 # Inicializamos el sensor de humedad
-moisture.init(cfg["moisture"]["pin"])
+moisture_sensor.init(cfg["moisture"]["pin"])
 
 # Inicializamos el LED RGB
 led_rgb.init(
@@ -33,7 +33,7 @@ scheduler.add_job(
 
 #! Temporal
 def job_read_moisture():
-    moisture = moisture.read_soil_moisture(cfg["moisture"]["raw_dry"], cfg["moisture"]["raw_wet"])
+    moisture = moisture_sensor.read_soil_moisture(cfg["moisture"]["raw_dry"], cfg["moisture"]["raw_wet"])
     led_rgb.update_led(moisture, cfg["moisture"]["optimal"])
     print(f"Humedad suelo: {moisture:5.1f}%")
 
