@@ -31,7 +31,11 @@ scheduler:
 # =====================
 
 moisture:
+  # Pin analógico al que está conectado el sensor de humedad
+  pin: A0
   # Valor absoluto de humedad en seco
   raw_dry: 21550
   # Valor absoluto de humedad en mojado
   raw_wet: 7600
+  # Valor de humedad (en porcentaje) considerado óptimo
+  optimal: 50
