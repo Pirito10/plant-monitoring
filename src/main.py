@@ -8,6 +8,14 @@ cfg = config.load_config()
 # Inicializamos el sensor de humedad
 moisture.init(cfg["moisture"]["pin"])
 
+# Inicializamos el LED RGB
+led_rgb.init(
+    cfg["led_rgb"]["pins"]["red"],
+    cfg["led_rgb"]["pins"]["green"],
+    cfg["led_rgb"]["pins"]["blue"],
+    cfg["led_rgb"]["pwm_frequency"]
+)
+
 # Creamos el planificador de tareas
 scheduler = BlockingScheduler()
 
