@@ -23,7 +23,7 @@ scheduler = BlockingScheduler()
 scheduler.add_job(
     camera.take_photo,
     "cron",
-    hour=",".join(map(str, cfg["scheduler"]["hours"])),
+    hour=",".join(map(str, cfg["scheduler"]["photo_hours"])),
     args=[
         cfg["paths"]["photos"],
         cfg["camera"]["width"],
@@ -41,7 +41,7 @@ def job_read_moisture():
 scheduler.add_job(
     job_read_moisture,
     "interval",
-    seconds=10
+    seconds=cfg["scheduler"]["moisture_interval"]
 )
 
 # Iniciamos el planificador

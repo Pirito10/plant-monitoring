@@ -23,7 +23,9 @@ paths:
 
 scheduler:
   # Horas del día (0-23) para tomar fotos
-  hours: [10, 18]
+  photo_hours: [10, 18]
+  # Intervalo (en segundos) para medir la humedad del suelo
+  moisture_interval: 10
 
 
 # =====================
