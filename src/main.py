@@ -5,6 +5,9 @@ from src import config, camera, moisture, led_rgb
 # Cargamos la configuración
 cfg = config.load_config()
 
+# Inicializamos el sensor de humedad
+moisture.init(cfg["moisture"]["pin"])
+
 # Creamos el planificador de tareas
 scheduler = BlockingScheduler()
 
