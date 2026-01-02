@@ -39,3 +39,18 @@ moisture:
   raw_wet: 7600
   # Valor de humedad (en porcentaje) considerado óptimo
   optimal: 50
+
+
+# ===========
+# 💡 LED RGB
+# ===========
+
+led_rgb:
+  # Pines GPIO a los que están conectados los canales del LED RGB
+  pins:
+    red: 17
+    green: 27
+    blue: 22
+
+  # Frecuencia PWM (en Hz) para el control del LED RGB
+  pwm_frequency: 500
