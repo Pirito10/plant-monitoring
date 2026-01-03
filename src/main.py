@@ -42,7 +42,7 @@ def job_read_moisture():
     print(f"Humedad suelo: {moisture:5.1f}%")
 
 def job_update_display():
-    display.update_display(moisture)
+    display.update_display(moisture, 25, 1)
 
 # Programamos la lectura del sensor de humedad
 scheduler.add_job(

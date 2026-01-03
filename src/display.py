@@ -1,3 +1,4 @@
+import time
 from luma.core.interface.serial import i2c
 from luma.oled.device import sh1106
 from luma.core.render import canvas
@@ -89,7 +90,15 @@ def draw_bar(draw, percent, x, y, width, height):
         draw.rectangle((x + 1, y + 1, x + 1 + fill_width, y + height - 1), fill="white")
 
 # Función para actualizar la pantalla
-def update_display(moisture):
+def update_display(moisture, moisture_threshold, blink_interval):
+    # Determinamos si la gota debe parpadear
+    blink = moisture < moisture_threshold
+
+    # Determinamos si la gota se debe mostrar
+    if blink:
+        drop_on = (int(time.monotonic() / blink_interval) % 2) == 0
+
+    # Dibujamos en la pantalla
     with canvas(device) as draw:
         # Dibujamos el sprite de la planta
         draw_sprite(draw, POT, 0, 0, 3)
@@ -97,3 +106,6 @@ def update_display(moisture):
         draw_bar(draw, moisture, 0, 57, 33, 5)
         # Dibujamos el valor de humedad
         draw.text((37, 54), f"{round(moisture)}%", fill="white")
+        # Dibujamos el sprite de la gota según el parpadeo
+        if not blink or drop_on:
+            draw_sprite(draw, DROP, 60, 0, 3)
