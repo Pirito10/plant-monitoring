@@ -94,9 +94,14 @@ def update_display(moisture, moisture_threshold, blink_interval):
     # Determinamos si la gota debe parpadear
     blink = moisture < moisture_threshold
 
+    # Si la humedad es muy baja, aumentamos la frecuencia de parpadeo
+    effective_interval = blink_interval
+    if moisture < moisture_threshold / 2:
+        effective_interval = blink_interval / 2
+
     # Determinamos si la gota se debe mostrar
     if blink:
-        drop_on = (int(time.monotonic() / blink_interval) % 2) == 0
+        drop_on = (int(time.monotonic() / effective_interval) % 2) == 0
 
     # Dibujamos en la pantalla
     with canvas(device) as draw:
