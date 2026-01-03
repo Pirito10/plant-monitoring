@@ -26,7 +26,8 @@ scheduler:
   photo_hours: [10, 18]
   # Intervalo (en segundos) para medir la humedad del suelo
   moisture_interval: 10
-
+  # Frecuencia (en segundos) de actualización de la pantalla
+  display_interval: 0.5
 
 # =====================
 # 💧 Sensor de humedad
@@ -56,3 +57,14 @@ led_rgb:
 
   # Frecuencia PWM (en Hz) para el control del LED RGB
   pwm_frequency: 500
+
+
+# ============
+# 🖥️ Pantalla
+# ============
+
+display:
+  # Valor (en porcentaje) de humedad mínimo antes de la activación del indicador de humedad baja
+  moisture_threshold: 30
+  # Intervalo (en segundos) de parpadeo del indicador de humedad baja
+  blink_interval: 1

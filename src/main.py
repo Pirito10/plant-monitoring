@@ -42,7 +42,7 @@ def job_read_moisture():
     print(f"Humedad suelo: {moisture:5.1f}%")
 
 def job_update_display():
-    display.update_display(moisture, 25, 1)
+    display.update_display(moisture, cfg["display"]["moisture_threshold"], cfg["display"]["blink_interval"])
 
 # Programamos la lectura del sensor de humedad
 scheduler.add_job(
@@ -54,7 +54,7 @@ scheduler.add_job(
 scheduler.add_job(
     job_update_display,
     "interval",
-    seconds=1
+    seconds=cfg["scheduler"]["display_interval"]
 )
 
 # Leemos la humedad al iniciar
