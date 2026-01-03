@@ -11,3 +11,21 @@ def init():
 
     # Creamos el objeto de la pantalla
     device = sh1106(serial)
+
+# Función para dibujar un sprite en la pantalla
+def draw_sprite(draw, sprite, x0, y0, scale):
+    # Recorremos las filas del sprite
+    for y, row in enumerate(sprite):
+        # Recorremos los píxeles de la fila
+        for x, px in enumerate(row):
+            # Si el píxel está activo, lo dibujamos a partir de las coordenadas dadas y con el escalado indicado
+            if px == "1":
+                draw.rectangle(
+                    (
+                        x0 + x * scale,
+                        y0 + y * scale,
+                        x0 + x * scale + scale - 1,
+                        y0 + y * scale + scale - 1,
+                    ),
+                    fill="white"
+                )
