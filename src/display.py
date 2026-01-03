@@ -71,3 +71,7 @@ def update_display(moisture):
     with canvas(device) as draw:
         # Dibujamos el sprite de la planta
         draw_sprite(draw, POT, 0, 0, 3)
+        # Dibujamos una barra con el nivel de humedad
+        draw_bar(draw, moisture, 0, 57, 33, 5)
+        # Dibujamos el valor de humedad
+        draw.text((37, 54), f"{round(moisture)}%", fill="white")
