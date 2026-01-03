@@ -38,6 +38,7 @@ scheduler.add_job(
 def job_read_moisture():
     moisture = moisture_sensor.read_soil_moisture(cfg["moisture"]["raw_dry"], cfg["moisture"]["raw_wet"])
     led_rgb.update_led(moisture, cfg["moisture"]["optimal"])
+    display.update_display(moisture)
     print(f"Humedad suelo: {moisture:5.1f}%")
 
 # Programamos la lectura del sensor de humedad

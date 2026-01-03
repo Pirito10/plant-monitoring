@@ -1,5 +1,6 @@
 from luma.core.interface.serial import i2c
 from luma.oled.device import sh1106
+from luma.core.render import canvas
 
 POT = [
     "00000011000",
@@ -50,3 +51,9 @@ def draw_sprite(draw, sprite, x0, y0, scale):
                     ),
                     fill="white"
                 )
+
+# Función para actualizar la pantalla
+def update_display(moisture):
+    with canvas(device) as draw:
+        # Dibujamos el sprite de la planta
+        draw_sprite(draw, POT, 0, 0, 3)
