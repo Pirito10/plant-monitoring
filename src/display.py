@@ -52,6 +52,20 @@ def draw_sprite(draw, sprite, x0, y0, scale):
                     fill="white"
                 )
 
+# Función para dibujar una barra de progreso en la pantalla
+def draw_bar(draw, percent, x, y, width, height):
+    # Convertimos el porcentaje a un valor entre 0 y 1
+    p = max(0, min(100, percent)) / 100
+    # Calculamos el ancho sin contar el borde
+    fill_width = p * (width - 2)
+
+    # Dibujamos el borde
+    draw.rectangle((x, y, x + width, y + height), outline="white")
+
+    # Dibujamos el relleno
+    if fill_width > 0:
+        draw.rectangle((x + 1, y + 1, x + 1 + fill_width, y + height - 1), fill="white")
+
 # Función para actualizar la pantalla
 def update_display(moisture):
     with canvas(device) as draw:
