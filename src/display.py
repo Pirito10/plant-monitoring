@@ -110,7 +110,7 @@ def update_display(moisture, moisture_threshold, blink_interval):
         # Dibujamos una barra con el nivel de humedad
         draw_bar(draw, moisture, 0, 59, 127, 4)
         # Dibujamos el valor de humedad
-        draw.text((37, 54), f"{round(moisture)}%", fill="white")
+        draw.text((57, 46), f"{round(moisture)}%", fill="white")
         # Dibujamos el sprite de la gota según el parpadeo
         if not blink or drop_on:
             draw_sprite(draw, DROP, 60, 0, 3)
