@@ -34,11 +34,15 @@ scheduler.add_job(
     ],
 )
 
-#! Temporal
+#! ----- Temporal ------
 def job_read_moisture():
+    global moisture
     moisture = moisture_sensor.read_soil_moisture(cfg["moisture"]["raw_dry"], cfg["moisture"]["raw_wet"])
     led_rgb.update_led(moisture, cfg["moisture"]["optimal"])
-    print(f"Humedad suelo: {moisture:5.1f}%")
+
+def job_update_display():
+    display.update_display(moisture, cfg["display"]["moisture_threshold"], cfg["display"]["blink_interval"])
+#! ---------------------
 
 # Programamos la lectura del sensor de humedad
 scheduler.add_job(
@@ -46,6 +50,16 @@ scheduler.add_job(
     "interval",
     seconds=cfg["scheduler"]["moisture_interval"]
 )
+
+# Programamos la actualización de la pantalla
+scheduler.add_job(
+    job_update_display,
+    "interval",
+    seconds=cfg["scheduler"]["display_interval"]
+)
+
+# Leemos la humedad al iniciar
+job_read_moisture()
 
 # Iniciamos el planificador
 scheduler.start()
