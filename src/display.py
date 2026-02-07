@@ -108,7 +108,7 @@ def update_display(moisture, moisture_threshold, blink_interval):
         # Dibujamos el sprite de la planta
         draw_sprite(draw, POT, 0, 0, 3)
         # Dibujamos una barra con el nivel de humedad
-        draw_bar(draw, moisture, 0, 57, 33, 5)
+        draw_bar(draw, moisture, 0, 59, 127, 4)
         # Dibujamos el valor de humedad
         draw.text((37, 54), f"{round(moisture)}%", fill="white")
         # Dibujamos el sprite de la gota según el parpadeo
