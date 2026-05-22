@@ -16,5 +16,8 @@ dependencies = [
     # Venv must be created with: python3 -m venv --system-site-packages venv
 ]
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [project.scripts]
-plant-monitor = "src.main:main"
+plant-monitor = "plant_monitoring.main:main"

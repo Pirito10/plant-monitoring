@@ -1,6 +1,6 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from src import config, camera, moisture_sensor, led_rgb, display
+from plant_monitoring import config, camera, moisture_sensor, led_rgb, display
 
 
 def main():
