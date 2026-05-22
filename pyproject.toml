@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "plant-monitoring"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "APScheduler~=3.11",
+    "PyYAML~=6.0",
+    "adafruit-circuitpython-ads1x15~=3.0",
+    "RPi.GPIO~=0.7",
+    "luma.oled~=3.14",
+    # picamera2 must be installed at system level: sudo apt install python3-picamera2
+    # Venv must be created with: python3 -m venv --system-site-packages venv
+]
+
+[project.scripts]
+plant-monitor = "src.main:main"
