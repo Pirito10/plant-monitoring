@@ -11,7 +11,7 @@ def main():
     cfg = config.load_config()
 
     # Inicializamos el sensor de humedad
-    sensor = MoistureSensor(cfg["moisture"]["pin"])
+    moisture_sensor = MoistureSensor(cfg["moisture"]["pin"])
 
     # Inicializamos el LED RGB
     led = LedRGB(
@@ -44,7 +44,7 @@ def main():
 
     def job_read_moisture():
         nonlocal moisture
-        moisture = sensor.read_soil_moisture(cfg["moisture"]["raw_dry"], cfg["moisture"]["raw_wet"])
+        moisture = moisture_sensor.read_soil_moisture(cfg["moisture"]["raw_dry"], cfg["moisture"]["raw_wet"])
         led.update(moisture, cfg["moisture"]["optimal"])
 
     def job_update_display():

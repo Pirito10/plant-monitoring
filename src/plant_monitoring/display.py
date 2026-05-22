@@ -58,7 +58,8 @@ class Display:
         self.device = sh1106(serial)
 
     # Función para dibujar un sprite en la pantalla
-    def draw_sprite(self, draw, sprite, x0, y0, scale):
+    @staticmethod
+    def draw_sprite(draw, sprite, x0, y0, scale):
         # Recorremos las filas del sprite
         for y, row in enumerate(sprite):
             # Recorremos los píxeles de la fila
@@ -76,7 +77,8 @@ class Display:
                     )
 
     # Función para dibujar una barra de progreso en la pantalla
-    def draw_bar(self, draw, percent, x, y, width, height):
+    @staticmethod
+    def draw_bar(draw, percent, x, y, width, height):
         # Convertimos el porcentaje a un valor entre 0 y 1
         p = max(0, min(100, percent)) / 100
         # Calculamos el ancho sin contar el borde
@@ -106,11 +108,11 @@ class Display:
         # Dibujamos en la pantalla
         with canvas(self.device) as draw:
             # Dibujamos el sprite de la planta
-            self.draw_sprite(draw, POT, 13, 0, 3)
+            Display.draw_sprite(draw, POT, 13, 0, 3)
             # Dibujamos una barra con el nivel de humedad
-            self.draw_bar(draw, moisture, 0, 59, 127, 4)
+            Display.draw_bar(draw, moisture, 0, 59, 127, 4)
             # Dibujamos el valor de humedad
             draw.text((57, 46), f"{round(moisture)}%", fill="white")
             # Dibujamos el sprite de la gota según el parpadeo
             if not blink or drop_on:
-                self.draw_sprite(draw, DROP, 88, 0, 3)
+                Display.draw_sprite(draw, DROP, 88, 0, 3)
