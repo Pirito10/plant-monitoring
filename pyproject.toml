@@ -11,7 +11,7 @@ dependencies = [
     "PyYAML~=6.0",
     "adafruit-circuitpython-ads1x15~=3.0",
     "RPi.GPIO~=0.7",
-    "luma.oled~=3.14",
+    "luma.oled~=3.15",
     # picamera2 must be installed at system level: sudo apt install python3-picamera2
     # Venv must be created with: python3 -m venv --system-site-packages venv
 ]
