@@ -1,6 +1,9 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from plant_monitoring import config, camera, moisture_sensor, led_rgb, display
+from plant_monitoring import config, camera
+from plant_monitoring.moisture_sensor import MoistureSensor
+from plant_monitoring.led_rgb import LedRGB
+from plant_monitoring.display import Display
 
 
 def main():
@@ -8,10 +11,10 @@ def main():
     cfg = config.load_config()
 
     # Inicializamos el sensor de humedad
-    moisture_sensor.init(cfg["moisture"]["pin"])
+    sensor = MoistureSensor(cfg["moisture"]["pin"])
 
     # Inicializamos el LED RGB
-    led_rgb.init(
+    led = LedRGB(
         cfg["led_rgb"]["pins"]["red"],
         cfg["led_rgb"]["pins"]["green"],
         cfg["led_rgb"]["pins"]["blue"],
@@ -19,7 +22,7 @@ def main():
     )
 
     # Inicializamos la pantalla
-    display.init()
+    display = Display()
 
     # Creamos el planificador de tareas
     scheduler = BlockingScheduler()
@@ -41,11 +44,11 @@ def main():
 
     def job_read_moisture():
         nonlocal moisture
-        moisture = moisture_sensor.read_soil_moisture(cfg["moisture"]["raw_dry"], cfg["moisture"]["raw_wet"])
-        led_rgb.update_led(moisture, cfg["moisture"]["optimal"])
+        moisture = sensor.read_soil_moisture(cfg["moisture"]["raw_dry"], cfg["moisture"]["raw_wet"])
+        led.update(moisture, cfg["moisture"]["optimal"])
 
     def job_update_display():
-        display.update_display(moisture, cfg["display"]["moisture_threshold"], cfg["display"]["blink_interval"])
+        display.update(moisture, cfg["display"]["moisture_threshold"], cfg["display"]["blink_interval"])
     #! ---------------------
 
     # Programamos la lectura del sensor de humedad
