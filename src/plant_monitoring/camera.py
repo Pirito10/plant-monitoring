@@ -1,7 +1,7 @@
 from datetime import datetime
 from picamera2 import Picamera2
 
-from plant_monitoring.config import BASE_DIR
+from plant_monitoring.paths import BASE_DIR
 
 # Función para tomar una foto con la cámara de la Raspberry Pi
 def take_photo(out_dir, width, height):
