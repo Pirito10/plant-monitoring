@@ -1,8 +1,8 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from plant_monitoring.camera import take_photo
-from plant_monitoring.config import load_config
 from plant_monitoring.paths import BASE_DIR
+from plant_monitoring.config import load_config
+from plant_monitoring.camera import take_photo
 from plant_monitoring.moisture_sensor import MoistureSensor
 from plant_monitoring.led_rgb import LedRGB
 from plant_monitoring.display import Display
