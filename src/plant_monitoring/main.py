@@ -1,6 +1,6 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from plant_monitoring import camera
+from plant_monitoring.camera import take_photo
 from plant_monitoring.config import load_config
 from plant_monitoring.paths import BASE_DIR
 from plant_monitoring.moisture_sensor import MoistureSensor
@@ -31,7 +31,7 @@ def main():
 
     # Programamos la toma de fotos
     scheduler.add_job(
-        camera.take_photo,
+        take_photo,
         "cron",
         hour=",".join(map(str, cfg["scheduler"]["photo_hours"])),
         args=[
