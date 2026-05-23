@@ -1,6 +1,6 @@
-# ==========
+# ===========
 # 📷 Cámara
-# ==========
+# ===========
 
 camera:
   # Resolución de la cámara en píxeles
@@ -8,18 +8,18 @@ camera:
   height: 1944
 
 
-# =========
+# ==========
 # 📁 Rutas
-# =========
+# ==========
 
 paths:
   # Directorio donde se guardarán las fotos
   photos: photos
 
 
-# ===========================
+# ============================
 # ⏱️ Planificación de tareas
-# ===========================
+# ============================
 
 scheduler:
   # Horas del día (0-23) para tomar fotos
@@ -29,9 +29,9 @@ scheduler:
   # Frecuencia (en segundos) de actualización de la pantalla
   display_interval: 0.5
 
-# =====================
+# ======================
 # 💧 Sensor de humedad
-# =====================
+# ======================
 
 moisture:
   # Pin analógico al que está conectado el sensor de humedad
@@ -44,9 +44,9 @@ moisture:
   optimal: 50
 
 
-# ===========
+# ============
 # 💡 LED RGB
-# ===========
+# ============
 
 led_rgb:
   # Pines GPIO a los que están conectados los canales del LED RGB
@@ -59,9 +59,9 @@ led_rgb:
   pwm_frequency: 500
 
 
-# ============
+# =============
 # 🖥️ Pantalla
-# ============
+# =============
 
 display:
   # Valor (en porcentaje) de humedad mínimo antes de la activación del indicador de humedad baja
