@@ -9,9 +9,6 @@ def take_photo(out_dir, width, height):
     out_dir = BASE_DIR / out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # Fichero de salida de la imagen
-    filepath = out_dir / f"{datetime.now():%Y-%m-%d_%H-%M}.jpg"
-
     # Inicializamos y configuramos la cámara
     with Picamera2() as picam:
         config = picam.create_still_configuration(
@@ -20,6 +17,8 @@ def take_photo(out_dir, width, height):
         picam.configure(config)
         picam.start()
 
+        # Fichero de salida de la imagen
+        filepath = out_dir / f"{datetime.now():%Y-%m-%d_%H-%M}.jpg"
         # Tomamos la foto
         picam.capture_file(filepath)
 
