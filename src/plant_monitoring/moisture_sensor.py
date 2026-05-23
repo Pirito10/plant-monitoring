@@ -23,10 +23,9 @@ class MoistureSensor:
         return self.chan.value
 
     # Función para convertir un valor bruto a humedad relativa normalizada
-    @staticmethod
-    def _raw_to_moisture(raw, raw_dry, raw_wet):
+    def _raw_to_moisture(self, raw):
         # Calculamos la humedad relativa normalizada
-        moisture = (raw_dry - raw) / (raw_dry - raw_wet)
+        moisture = (self.raw_dry - raw) / (self.raw_dry - self.raw_wet)
         # Devolvemos el valor entre 0 y 1
         return max(0, min(1, moisture))
 
@@ -35,4 +34,4 @@ class MoistureSensor:
         # Leemos el valor bruto del sensor
         raw = self._read_raw()
         # Devolvemos el valor bruto convertido a humedad relativa en porcentaje
-        return self._raw_to_moisture(raw, self.raw_dry, self.raw_wet) * 100
+        return self._raw_to_moisture(raw) * 100
