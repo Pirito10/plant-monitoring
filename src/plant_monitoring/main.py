@@ -29,7 +29,10 @@ def main():
     )
 
     # Inicializamos la pantalla
-    display = Display()
+    display = Display(
+        cfg["display"]["moisture_threshold"],
+        cfg["display"]["blink_interval"]
+    )
 
     # Creamos el planificador de tareas
     scheduler = BlockingScheduler()
@@ -55,7 +58,7 @@ def main():
         led.update(moisture)
 
     def job_update_display():
-        display.update(moisture, cfg["display"]["moisture_threshold"], cfg["display"]["blink_interval"])
+        display.update(moisture)
     #! ---------------------
 
     # Programamos la lectura del sensor de humedad

@@ -50,16 +50,20 @@ DROP = [
 
 class Display:
     # Inicializamos la pantalla
-    def __init__(self):
+    def __init__(self, moisture_threshold, blink_interval):
         # Creamos el bus I2C
         serial = i2c()
 
         # Creamos el objeto de la pantalla
         self.device = sh1106(serial)
 
+        # Guardamos los parámetros de configuración
+        self.moisture_threshold = moisture_threshold
+        self.blink_interval = blink_interval
+
     # Función para dibujar un sprite en la pantalla
     @staticmethod
-    def draw_sprite(draw, sprite, x0, y0, scale):
+    def _draw_sprite(draw, sprite, x0, y0, scale):
         # Recorremos las filas del sprite
         for y, row in enumerate(sprite):
             # Recorremos los píxeles de la fila
@@ -78,7 +82,7 @@ class Display:
 
     # Función para dibujar una barra de progreso en la pantalla
     @staticmethod
-    def draw_bar(draw, percent, x, y, width, height):
+    def _draw_bar(draw, percent, x, y, width, height):
         # Convertimos el porcentaje a un valor entre 0 y 1
         p = max(0, min(100, percent)) / 100
         # Calculamos el ancho sin contar el borde
@@ -92,14 +96,14 @@ class Display:
             draw.rectangle((x + 1, y + 1, x + 1 + fill_width, y + height - 1), fill="white")
 
     # Función para actualizar la pantalla
-    def update(self, moisture, moisture_threshold, blink_interval):
+    def update(self, moisture):
         # Determinamos si la gota debe parpadear
-        blink = moisture < moisture_threshold
+        blink = moisture < self.moisture_threshold
 
         # Si la humedad es muy baja, aumentamos la frecuencia de parpadeo
-        effective_interval = blink_interval
-        if moisture < moisture_threshold / 2:
-            effective_interval = blink_interval / 2
+        effective_interval = self.blink_interval
+        if moisture < self.moisture_threshold / 2:
+            effective_interval = self.blink_interval / 2
 
         # Determinamos si la gota se debe mostrar
         if blink:
@@ -108,11 +112,11 @@ class Display:
         # Dibujamos en la pantalla
         with canvas(self.device) as draw:
             # Dibujamos el sprite de la planta
-            Display.draw_sprite(draw, POT, 13, 0, 3)
+            Display._draw_sprite(draw, POT, 13, 0, 3)
             # Dibujamos una barra con el nivel de humedad
-            Display.draw_bar(draw, moisture, 0, 59, 127, 4)
+            Display._draw_bar(draw, moisture, 0, 59, 127, 4)
             # Dibujamos el valor de humedad
             draw.text((57, 46), f"{round(moisture)}%", fill="white")
             # Dibujamos el sprite de la gota según el parpadeo
             if not blink or drop_on:
-                Display.draw_sprite(draw, DROP, 88, 0, 3)
+                Display._draw_sprite(draw, DROP, 88, 0, 3)
