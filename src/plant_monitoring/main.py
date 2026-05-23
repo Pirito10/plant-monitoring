@@ -1,6 +1,8 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from plant_monitoring import config, camera
+from plant_monitoring import camera
+from plant_monitoring.config import load_config
+from plant_monitoring.paths import BASE_DIR
 from plant_monitoring.moisture_sensor import MoistureSensor
 from plant_monitoring.led_rgb import LedRGB
 from plant_monitoring.display import Display
@@ -8,7 +10,7 @@ from plant_monitoring.display import Display
 
 def main():
     # Cargamos la configuración
-    cfg = config.load_config()
+    cfg = load_config()
 
     # Inicializamos el sensor de humedad
     moisture_sensor = MoistureSensor(cfg["moisture"]["pin"])
@@ -33,7 +35,7 @@ def main():
         "cron",
         hour=",".join(map(str, cfg["scheduler"]["photo_hours"])),
         args=[
-            cfg["paths"]["photos"],
+            BASE_DIR / cfg["paths"]["photos"],
             cfg["camera"]["width"],
             cfg["camera"]["height"]
         ],
