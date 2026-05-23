@@ -4,7 +4,7 @@ from luma.oled.device import sh1106
 from luma.core.render import canvas
 
 
-POT = [
+_POT = [
     "00000011000",
     "00000111000",
     "00110110110",
@@ -25,7 +25,7 @@ POT = [
     "00111111100"
 ]
 
-DROP = [
+_DROP = [
     "00000100000",
     "00000100000",
     "00000100000",
@@ -112,11 +112,11 @@ class Display:
         # Dibujamos en la pantalla
         with canvas(self.device) as draw:
             # Dibujamos el sprite de la planta
-            Display._draw_sprite(draw, POT, 13, 0, 3)
+            Display._draw_sprite(draw, _POT, 13, 0, 3)
             # Dibujamos una barra con el nivel de humedad
             Display._draw_bar(draw, moisture, 0, 59, 127, 4)
             # Dibujamos el valor de humedad
             draw.text((57, 46), f"{round(moisture)}%", fill="white")
             # Dibujamos el sprite de la gota según el parpadeo
             if not blink or drop_on:
-                Display._draw_sprite(draw, DROP, 88, 0, 3)
+                Display._draw_sprite(draw, _DROP, 88, 0, 3)
