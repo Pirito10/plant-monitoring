@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Función para cargar la configuración del sistema
 def load_config():
     # Ruta al fichero de configuración
-    path = BASE_DIR / "config" / "config.yaml"
+    path = BASE_DIR / "settings.yaml"
     
     # Abrimos y leemos el fichero YAML
     with path.open("r") as f:
