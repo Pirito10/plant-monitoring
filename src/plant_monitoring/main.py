@@ -25,7 +25,7 @@ def main():
         cfg["led_rgb"]["pins"]["green"],
         cfg["led_rgb"]["pins"]["blue"],
         cfg["led_rgb"]["pwm_frequency"],
-        cfg["moisture"]["optimal"]
+        cfg["led_rgb"]["optimal_moisture"]
     )
 
     # Inicializamos la pantalla

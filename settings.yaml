@@ -40,8 +40,6 @@ moisture:
   raw_dry: 21550
   # Valor absoluto de humedad en mojado
   raw_wet: 7600
-  # Valor de humedad (en porcentaje) considerado óptimo
-  optimal: 50
 
 
 # ===========
@@ -57,6 +55,8 @@ led_rgb:
 
   # Frecuencia PWM (en Hz) para el control del LED RGB
   pwm_frequency: 500
+  # Valor de humedad (en porcentaje) considerado óptimo para el gradiente de color
+  optimal_moisture: 50
 
 
 # ============
