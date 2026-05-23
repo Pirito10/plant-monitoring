@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 
 class LedRGB:
     # Inicializamos el LED RGB
-    def __init__(self, pin_r, pin_g, pin_b, pwm_freq):
+    def __init__(self, pin_r, pin_g, pin_b, pwm_freq, optimal):
         # Inicializamos los pines GPIO
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(pin_r, GPIO.OUT)
@@ -20,13 +20,15 @@ class LedRGB:
         self.pwm_g.start(0)
         self.pwm_b.start(0)
 
+        # Guardamos el valor óptimo de humedad
+        self.optimal = optimal
+
     # Función para calcular el color RGB para un valor de humedad
-    @staticmethod
-    def moisture_to_color(moisture, optimal):
+    def _moisture_to_color(self, moisture):
         # Convertimos la humedad a un valor entre 0 y 1
         m = max(0, min(100, moisture)) / 100
         # Convertimos el valor óptimo a un valor entre 0 y 1
-        opt = max(0, min(100, optimal)) / 100
+        opt = max(0, min(100, self.optimal)) / 100
 
         # Si hay humedad baja, el color sale entre rojo y verde
         if m <= opt:
@@ -50,15 +52,15 @@ class LedRGB:
         return r, g, b
 
     # Función para establecer el color del LED RGB
-    def set_color(self, r, g, b):
+    def _set_color(self, r, g, b):
         # Ajustamos los valores PWM para cada color
         self.pwm_r.ChangeDutyCycle(r / 255 * 100)
         self.pwm_g.ChangeDutyCycle(g / 255 * 100)
         self.pwm_b.ChangeDutyCycle(b / 255 * 100)
 
     # Función para actualizar el color del LED
-    def update(self, moisture, optimal):
+    def update(self, moisture):
         # Calculamos el color basado en la humedad
-        r, g, b = self.moisture_to_color(moisture, optimal)
+        r, g, b = self._moisture_to_color(moisture)
         # Establecemos el color del LED
-        self.set_color(r, g, b)
+        self._set_color(r, g, b)

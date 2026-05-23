@@ -24,7 +24,8 @@ def main():
         cfg["led_rgb"]["pins"]["red"],
         cfg["led_rgb"]["pins"]["green"],
         cfg["led_rgb"]["pins"]["blue"],
-        cfg["led_rgb"]["pwm_frequency"]
+        cfg["led_rgb"]["pwm_frequency"],
+        cfg["moisture"]["optimal"]
     )
 
     # Inicializamos la pantalla
@@ -51,7 +52,7 @@ def main():
     def job_read_moisture():
         nonlocal moisture
         moisture = moisture_sensor.read_soil_moisture()
-        led.update(moisture, cfg["moisture"]["optimal"])
+        led.update(moisture)
 
     def job_update_display():
         display.update(moisture, cfg["display"]["moisture_threshold"], cfg["display"]["blink_interval"])
