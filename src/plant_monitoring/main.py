@@ -24,7 +24,6 @@ def main():
         cfg["led_rgb"]["pins"]["red"],
         cfg["led_rgb"]["pins"]["green"],
         cfg["led_rgb"]["pins"]["blue"],
-        cfg["led_rgb"]["pwm_frequency"],
         cfg["led_rgb"]["optimal_moisture"]
     )
 
